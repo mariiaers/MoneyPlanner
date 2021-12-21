@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Money Planner</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+	<link href= "./css/styles.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<header>
+		<div class="container" id="nav-container" >
+		<nav class="navbar navbar-expand-lg fixed-top">
+			<a class="navbar-brand">
+				<img id="logo" src="https://pbs.twimg.com/media/FCFmeSSVkAEp7E2?format=png&name=360x360" alt="Money Planner"/>
+				<img id="user" src="https://www.pinclipart.com/picdir/big/200-2008697_account-customer-login-man-user-icon-login-icon.png" alt="Money Planner"/>
+				</a>
+				<div id="greetings">
+						<h6>Bem-vindo</h6> 
+						<h6><b>[[${#request.userPrincipal.principal.NomeEmpresa}]]</b></h6>		 				  		 				
+					</div>
+			<button class="navbar-toggler" type="button" data-toggle= "collapse" data-target="#navbar-links" aria-controls="navbar-links" aria-expanded="false" aria-label = "Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class = "collapse navbar-collapse justify-content-end" id="navbar-links">
+				<div class="navbar-nav">
+					<form th:action="@{/logout}" method="post" >
+						<input id="exit" type="image" value="Sign Out" src="https://www.iconpacks.net/icons/2/free-exit-logout-icon-2857-thumb.png" />
+					</form>
+				</div>
+			</div>
+		</nav>
+		</div>
+	</header>
+	
+		<div>
+			<input id="fluxodecaixa" type="image" src="https://www.freeiconspng.com/uploads/cash-machine-icon-17.png" />
+			<a th:href="@{/fluxodecaixa}" class="nav-item nav-button" id = "button-fluxo">Fluxo de Caixa</a>
+			<input id="calculadora" type="image" src="https://upload.wikimedia.org/wikipedia/commons/1/1e/Calculator_icon.svg" />
+			<a th:href="@{/calculator}" class="nav-item nav-button" id = "button-calculadora">Calculadora</a>
+			<input id="relatorios" type="image" src="https://cordisburgo.cam.mg.gov.br/wp-content/uploads/2018/05/flaticon-relatorio-personalizado-1-e1530813304442.png" />
+			<a th:href="@{/relatoriomensal}" class="nav-item nav-button" id = "button-relatorio">Relatório Mensal</a>
+			<input id="impostodrenda" type="image" src="data:image/png;base64,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" />
+			<a th:href="@{/irrf}" class="nav-item nav-button" id = "button-tabela">Calculadora do Imposto de Renda</a>
+		</div>	
+		
+		<div id="titulo">
+   		 	
+		</div>
+		
+		<div id="texto">
+			
+		</div>
+</body>
+</html>
