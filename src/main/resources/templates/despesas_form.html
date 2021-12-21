@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Money Planner</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+	<link href= "./css/styles.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<header>
+		<div class="container" id="nav-container" >
+		<nav class="navbar navbar-expand-lg fixed-top">
+			<a class="navbar-brand">
+				<img id="logo" src="https://pbs.twimg.com/media/FCFmeSSVkAEp7E2?format=png&name=360x360" alt="Money Planner"/>
+			</a>
+			<button class="navbar-toggler" type="button" data-toggle= "collapse" data-target="#navbar-links" aria-controls="navbar-links" aria-expanded="false" aria-label = "Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class = "collapse navbar-collapse justify-content-end" id="navbar-links">
+			</div>
+		</nav>
+		</div>
+	</header>
+	
+	<div class="container-fluid">
+	<form th:action="@{/despesas/save}" method="POST" th:object="${despesa}"
+		style="max-width: 500px; margin: 0 auto; margin-top: 150px">
+		<input type="hidden" th:field="*{id}">
+		<div class="border border-secondary rounded p-4">
+			<div class="form-group row">
+				<label class="col-sn-4 col-form-label" style="margin-left: 100px;">Informe o dia atual: (DD/MM/AAAA)</label>
+				<div class="col-sn-8" style="margin-left: 120px;">
+					<input type="text" th:field="*{data}" class="form-control" required/>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sn-4 col-form-label" style="margin-left: 100px;">Informe o tipo: (Lucro ou despesa?)</label>
+				<div class="col-sn-8" style="margin-left: 120px;">
+					<input type="text" th:field="*{tipo}" class="form-control" required/>
+				</div>
+			</div>
+			<div class="form-group row" style="margin-top: 15px;">
+				<label class="col-sn-4 col-form-label" style="margin-left: 100px;">Descrição: (Ex. Pagamento - cliente)</label>
+				<div class="col-sn-8" style="margin-left: 120px;">
+					<input type="text" th:field="*{descricao}" class="form-control" required/>
+				</div>
+			</div>
+			<div class="form-group row" style="margin-top: 15px;">
+				<label class="col-sn-4 col-form-label" style="margin-left: 40px;">Se o tipo for DESPESA, favor informar se já está pago:</label>
+				<div class="col-sn-8" style="margin-left: 120px;">
+					<input type="text" th:field="*{status}"class="form-control" />
+				</div>
+			</div>
+			<div class="form-group row" style="margin-top: 15px;">
+				<label class="col-sn-4 col-form-label" style="margin-left: 170px;">Informe o valor:</label>
+				<div class="col-sn-8" style="margin-left: 120px;">
+					<input type="text" th:field="*{valor}"class="form-control" required/>
+				</div>
+			</div>
+			<div class="form-group row" style="margin-top: 15px;">
+				<label class="col-sn-4 col-form-label" style="margin-left: 100px;">Informe a forma de pagamento:</label>
+				<div class="col-sn-8" style="margin-left: 110px;">
+					<input type="text" th:field="*{formapg}" class="form-control" required/>
+				</div>
+			</div>
+			<div class="text-center">
+				<button type="submit" class="btn btn-second n-2">Finalizar</button>
+				<button type="button" class="btn btn-second n-2" onclick="cancelForm()">Cancelar</button>
+			</div>
+		</div>
+	</form>
+	</div>
+	
+	<script type="text/javascript">
+	
+		function cancelForm() {
+			window.location = "[[@{/fluxodecaixa}]]";
+		}
+		
+	</script>	
+</body>
+</html>
